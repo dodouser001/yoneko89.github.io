@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>縛彪ヨネ子の印鑑帳簿</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <style>
+    body {
+      font-family: "Hiragino Maru Gothic ProN", sans-serif;
+      background: linear-gradient(135deg, #ffe0f0, #fff7d6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .calendar {
+      width: 380px;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    .calendar-header {
+      background: #ff9ecb;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .calendar-header h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 18px;
+      background: rgba(255,255,255,0.25);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.45);
+      transform: scale(1.1);
+    }
+
+    #prev {
+      left: 16px;
+    }
+
+    #next {
+      right: 16px;
+    }
+
+    .weekdays,
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .weekdays div {
+      background: #fff0f6;
+      color: #ff69a6;
+      padding: 12px 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .days div {
+      height: 54px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 4px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 15px;
+    }
+
+    .days div:hover {
+      background: #ffe0f0;
+      transform: scale(1.08);
+    }
+
+    .today {
+      background: #ff8ec2;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(255,142,194,0.4);
+    }
+
+    .empty {
+      cursor: default;
+    }
+
+    .holiday {
+      color: #ff5a5a;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calendar">
+  <div class="calendar-header">
+    <button class="nav-btn" id="prev">◀</button>
+    <h1 id="monthYear"></h1>
+    <button class="nav-btn" id="next">▶</button>
+  </div>
+
+  <div class="weekdays">
+    <div>日</div>
+    <div>月</div>
+    <div>火</div>
+    <div>水</div>
+    <div>木</div>
+    <div>金</div>
+    <div>土</div>
+  </div>
+
+  <div class="days" id="days"></div>
+</div>
+
+<script>
+$(function () {
+
+  let currentDate = new Date();
+
+  function renderCalendar(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    $("#monthYear").text(`${year}年 ${month + 1}月`);
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    const today = new Date();
+
+    $("#days").empty();
+
+    // 空白
+    for (let i = 0; i < firstDay; i++) {
+      $("#days").append('<div class="empty"></div>');
+    }
+
+    // 日付
+    for (let day = 1; day <= lastDate; day++) {
+
+      const dayElement = $("<div>").text(day);
+
+      // 土日カラー
+      const weekDay = new Date(year, month, day).getDay();
+
+      if (weekDay === 0) {
+        dayElement.addClass("holiday");
+      }
+
+      // 今日
+      if (
+        year === today.getFullYear() &&
+        month === today.getMonth() &&
+        day === today.getDate()
+      ) {
+        dayElement.addClass("today");
+      }
+
+      // クリックイベント
+      dayElement.on("click", function () {
+        alert(`${year}年${month + 1}月${day}日`);
+      });
+
+      $("#days").append(dayElement);
+    }
+  }
+
+  // 前月
+  $("#prev").on("click", function () {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar(currentDate);
+  });
+
+  // 次月
+  $("#next").on("click", function () {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar(currentDate);
+  });
+
+  renderCalendar(currentDate);
+
+});
+</script>
+
+</body>
+</html>
