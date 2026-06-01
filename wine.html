@@ -1,0 +1,215 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vin Noble - ワイン専門店</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Yu Gothic",sans-serif;
+    background:#f8f5f0;
+    color:#333;
+}
+
+header{
+    height:100vh;
+    background:
+        linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+        url("https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1600");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.hero h1{
+    font-size:4rem;
+    letter-spacing:3px;
+}
+
+.hero p{
+    margin-top:20px;
+    font-size:1.3rem;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:15px 40px;
+    background:#a71d31;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#7d1324;
+}
+
+.section-title{
+    text-align:center;
+    margin:80px 0 40px;
+    font-size:2rem;
+    color:#6d071a;
+}
+
+.products{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.country{
+    color:#777;
+    font-size:.9rem;
+}
+
+.price{
+    font-size:1.8rem;
+    color:#a71d31;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.buy-btn{
+    width:100%;
+    border:none;
+    background:#6d071a;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.buy-btn:hover{
+    background:#4f0413;
+}
+
+.about{
+    max-width:1000px;
+    margin:100px auto;
+    padding:40px;
+    text-align:center;
+}
+
+.about p{
+    line-height:1.8;
+    margin-top:20px;
+}
+
+footer{
+    background:#1a1a1a;
+    color:white;
+    text-align:center;
+    padding:30px;
+    margin-top:80px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="hero">
+        <h1>VIN NOBLE</h1>
+        <p>縛彪ヨネ子が世界中の厳選ワインをお届け</p>
+        <a href="#products" class="btn">商品を見る</a>
+    </div>
+</header>
+
+<section id="products">
+    <h2 class="section-title">縛彪ヨネ子オリジナルステッカー付ワイン</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600" alt="">
+            <div class="card-content">
+                <h3>シャトー・ルージュ 2020</h3>
+                <p class="country">フランス・ボルドー</p>
+                <div class="price">¥4,980</div>
+                <button class="buy-btn">カートに追加</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1569919659476-f0852f6834b7?w=600" alt="">
+            <div class="card-content">
+                <h3>トスカーナ・クラシコ</h3>
+                <p class="country">イタリア・トスカーナ</p>
+                <div class="price">¥6,800</div>
+                <button class="buy-btn">カートに追加</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600" alt="">
+            <div class="card-content">
+                <h3>ナパ・ヴァレー リザーブ</h3>
+                <p class="country">アメリカ・カリフォルニア</p>
+                <div class="price">¥8,900</div>
+                <button class="buy-btn">カートに追加</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="about">
+    <h2 class="section-title">私たちについて</h2>
+    <p>
+        Vin Nobleは世界各地のワイナリーから厳選したワインを
+        直接仕入れ、お客様へお届けする専門ショップです。
+        特別な日の一本からデイリーワインまで、
+        幅広いラインナップをご用意しております。
+    </p>
+</section>
+
+<footer>
+    <p>© 2026 VIN NOBLE All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
+```
