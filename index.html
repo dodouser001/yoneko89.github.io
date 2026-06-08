@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>縛彪ヨネ子の印鑑帳簿</title>
 
-  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <style>
@@ -23,7 +22,6 @@
       text-align:center;
     }
 
-    /* かわいい見出し */
     .cute-heading{
       display:inline-block;
       margin-bottom:20px;
@@ -152,7 +150,6 @@
       color: #ff5a5a;
     }
 
-    /* 印 */
     .marked::after {
       content: "❤";
       position: absolute;
@@ -163,21 +160,19 @@
     }
 
     @keyframes pop {
-      0% {
+      from {
         transform: scale(0);
       }
-      100% {
+      to {
         transform: scale(1);
       }
     }
-
   </style>
 </head>
 <body>
 
 <div class="calendar-wrapper">
 
-  <!-- 追加したかわいい見出し -->
   <div class="cute-heading">
     縛彪ヨネ子の印鑑帳簿
   </div>
@@ -209,8 +204,21 @@ $(function () {
 
   let currentDate = new Date();
 
-  // 印を保存
-  const markedDates = new Set();
+  // ------------------------
+  // localStorageから復元
+  // ------------------------
+  const markedDates = new Set(
+    JSON.parse(
+      localStorage.getItem("markedDates") || "[]"
+    )
+  );
+
+  function saveMarkedDates() {
+    localStorage.setItem(
+      "markedDates",
+      JSON.stringify([...markedDates])
+    );
+  }
 
   function formatDate(year, month, day) {
     return `${year}-${month + 1}-${day}`;
@@ -230,7 +238,7 @@ $(function () {
 
     $("#days").empty();
 
-    // 空白
+    // 月初の空白
     for (let i = 0; i < firstDay; i++) {
       $("#days").append('<div class="empty"></div>');
     }
@@ -242,8 +250,9 @@ $(function () {
 
       const dateKey = formatDate(year, month, day);
 
-      // 日曜
+      // 日曜日
       const weekDay = new Date(year, month, day).getDay();
+
       if (weekDay === 0) {
         dayElement.addClass("holiday");
       }
@@ -262,16 +271,23 @@ $(function () {
         dayElement.addClass("marked");
       }
 
-      // クリックで印ON/OFF
+      // クリックで印のON/OFF
       dayElement.on("click", function () {
 
         if (markedDates.has(dateKey)) {
+
           markedDates.delete(dateKey);
           $(this).removeClass("marked");
+
         } else {
+
           markedDates.add(dateKey);
           $(this).addClass("marked");
+
         }
+
+        // localStorageへ保存
+        saveMarkedDates();
 
       });
 
